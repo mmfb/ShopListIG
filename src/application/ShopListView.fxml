@@ -19,6 +19,6 @@
       </Label>
    </top>
    <center>
-      <ListView maxHeight="300.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="shopListLV" maxHeight="300.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
