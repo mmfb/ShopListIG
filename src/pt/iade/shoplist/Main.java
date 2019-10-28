@@ -18,7 +18,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(
-					Main.class.getResource("ShopListView.fxml"));
+					Main.class.getResource("./views/ShopListView.fxml"));
 			loader.setController(new ShopListController());
 			Parent root = loader.load();			
 			Scene scene = new Scene(root);
