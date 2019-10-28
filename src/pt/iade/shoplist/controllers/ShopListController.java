@@ -1,32 +1,21 @@
 package pt.iade.shoplist.controllers;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import pt.iade.shoplist.models.Shoplist;
-import pt.iade.shoplist.models.daos.ShoplistDAO;
+import pt.iade.shoplist.models.Item;
 
-/**
- * 
- * This class controls the window that presents a shop list.
- * 
- * <p> Shows all items in a shop list
- * 
- * @author Miguel
- */
 public class ShopListController {
+
+
     @FXML
-    private ListView<Shoplist> shopListLV;
-    
-    
-    /**
-     * xdgsdg
-     */
+    private Label titleL;
+
     @FXML
-    private void initialize() {
-    	shopListLV.setItems(ShoplistDAO.getAllShoplists());
+    private ListView<Item> itemsLV;
+
+    @FXML
+    void backToMain(ActionEvent event) {
     	
     }
-    
 }
