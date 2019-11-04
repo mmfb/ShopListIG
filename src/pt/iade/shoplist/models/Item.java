@@ -16,5 +16,10 @@ public class Item {
 	public double getCost() {
 		return quantity*product.getPrice();
 	}
+	@Override
+	public String toString() {
+		return quantity + " X " + product + " - Total : "+
+				String.format("%.2f", getCost())+" €";
+	}
 	
 }

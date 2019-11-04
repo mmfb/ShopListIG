@@ -31,7 +31,8 @@ public class MainController {
     	shopListLV.getSelectionModel().
 		selectedItemProperty().addListener(
 			(obs,oldVal,newVal)-> {
-				WindowManager.openItemsWindow();
+				if (newVal != null)
+					WindowManager.openItemsWindow(newVal);
 			});
     }
     

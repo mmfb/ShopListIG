@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pt.iade.shoplist.controllers.MainController;
 import pt.iade.shoplist.controllers.ShopListController;
+import pt.iade.shoplist.models.Shoplist;
 
 final public class WindowManager {
 
@@ -20,9 +21,9 @@ final public class WindowManager {
 	private WindowManager() {}
 
 
-	static public void openItemsWindow() {
+	static public void openItemsWindow(Shoplist shoplist) {
 		Parent root = createNodeTree("./views/ShopListView.fxml",
-				new ShopListController());		
+				new ShopListController(shoplist));		
 		Stage stage = new Stage();
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(

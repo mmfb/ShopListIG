@@ -20,5 +20,12 @@ public class Shoplist {
 		}
 		return sum;
 	}
+	public ObservableList<Item> getItems() {
+		return items;
+	}
+	public String getName() {
+		return name;
+	}
+	
 	
 }
