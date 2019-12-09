@@ -6,6 +6,7 @@ import javafx.scene.control.ListView;
 import pt.iade.shoplist.WindowManager;
 import pt.iade.shoplist.models.Item;
 import pt.iade.shoplist.models.Shoplist;
+import pt.iade.shoplist.models.daos.ShoplistDAO;
 
 public class ShopListController {
     @FXML
@@ -22,7 +23,7 @@ public class ShopListController {
     
     @FXML
     private void initialize() {
-    	itemsLV.setItems(shoplist.getItems());
+    	itemsLV.setItems(ShoplistDAO.getShoplistItems(shoplist.getId()));
     	titleL.setText(shoplist.getName());
     }
     

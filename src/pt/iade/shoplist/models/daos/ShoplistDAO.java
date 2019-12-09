@@ -1,6 +1,12 @@
 package pt.iade.shoplist.models.daos;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pt.iade.shoplist.models.ImportedProduct;
@@ -12,6 +18,58 @@ final public class ShoplistDAO {
 	
 	private ShoplistDAO() {}
 	
+	static public ObservableList<Shoplist> getAllShoplists() {
+		Connection conn = DBConnector.getConnection();
+		String sql = "Select * from shoplists";
+		 ObservableList<Shoplist> shoplists = 
+				 FXCollections.observableArrayList();
+		 try(Statement stat=conn.createStatement();
+		     ResultSet rs = stat.executeQuery(sql)) {
+			 while(rs.next()) {
+				 int id = rs.getInt("id");
+				 String name = rs.getString("name");
+				 shoplists.add(new Shoplist(id,name));
+			 }
+		 } catch(SQLException err) {
+			 err.printStackTrace();
+		 }
+		 
+		return shoplists;
+	}
+
+	public static ObservableList<Item> getShoplistItems(int id) {
+		Connection conn = DBConnector.getConnection();
+		String sql = "Select quantity,name,price,country "+
+		"from items, products "+
+		"where product_id = id AND shoplist_id = ?";
+		ObservableList<Item> items = FXCollections.observableArrayList();
+		
+		try(PreparedStatement stat = conn.prepareStatement(sql)) {
+			stat.setInt(1, id);
+			try(ResultSet rs = stat.executeQuery()) {
+				while (rs.next()) {
+					double quant = rs.getDouble("quantity");
+					String nome = rs.getString("name");
+					double preco = rs.getDouble("price");
+					String pais = rs.getString("country");
+					Product produto;
+					if (pais == null) {
+						produto = new Product(nome,preco);
+					} else {
+						produto = new ImportedProduct(nome,preco,pais,"");
+					}
+					Item item = new Item(quant,produto);
+					items.add(item);
+				}
+			}
+		} catch(SQLException err) {
+			 err.printStackTrace();
+		}
+		
+		return items;
+	}
+	
+	/*
 	static private ObservableList<Shoplist> shoplists =
 			FXCollections.observableArrayList();
 	
@@ -36,5 +94,6 @@ final public class ShoplistDAO {
 	static public ObservableList<Shoplist> getAllShoplists() {
 		return shoplists;
 	}
+	*/
 
 }
